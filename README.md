@@ -32,9 +32,18 @@ And it prints:
 You're good to go. Enough talk,  lets get started to write some Elm,
 in this short tutorial we're gonna decode some JSON API calls and later turn this into an little app.
 
+#### Some basics about decoding JSON with Elm
+
+If you have a JavaScript/node.js background you will probably ask why do we need to encode and
+decode JSON like in other languages since Elm is built upon node.js?
+
+As pointed in the introduction Elm  is a complete other language to JavaScript so it also
+has a complete different representation to datastructures to JavaScript Objects which
+are commently used as data interchange format as [JSON](http://www.json.org/).
+
 #### Install missing dependencies
 
-In order to run the Elm example app we're gonna built we need to install missing dependencies.
+In order to run the Elm example app we're gonna built we need to install missing dependencies we need to write an program to decode JSON. 
 
 If you navigate to [https://package.elm-lang.org/](https://package.elm-lang.org/) you will see all current
 packages provide for elm 0.19.
@@ -90,6 +99,8 @@ view model =
 ]
 
 ```
+#### Writing an JSON decoder
+
 
 #### Conclusion
 
