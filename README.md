@@ -5,16 +5,14 @@ This is the source code for my Elm beginner tutorial how to get started with lea
 #### An short introduction to Elm 
 
 Elm was created by Evan Czaplicki as his [thesis](https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf) in 2012, Elm is a purely functional programming language for building web applications.
+
 In my view one the most interesting points is the Elm Architecture:
 
---MODEL--
---UPDATE--
---VIEW--
+![Model-Update-View](img/Model-Update-View.png)
 
-This MUV pattern is always the same across all Elm apps once you understand this things like
-writing an SPA with elm will become very ease with Elm.
-This is really straightfoward concept in Elm and pretty similar to other reactive
-concepts like Facebook's react for example.
+This MUV pattern is always the same across all Elm apps once you understand this things like writing an SPA with elm will become very ease with Elm.
+
+This is really a straightfoward concept in Elm and pretty similar to other reactive concepts like Facebook's [React](https://reactjs.org/) for example.
 
 #### Install Elm and setup
 
@@ -31,13 +29,13 @@ And it prints:
 
 ``` Hi, thank you for trying out Elm 0.19.0. I hope you like it! ```
 
-You're good to go. Enough talk lets get started to write some Elm,
-in this short tutorial we're gonna decode some JSON API calls and later turn this
-into a little app.
+You're good to go. Enough talk,  lets get started to write some Elm,
+in this short tutorial we're gonna decode some JSON API calls and later turn this into an little app.
 
 #### Install missing dependencies
 
 In order to run the Elm example app we're gonna built we need to install missing dependencies.
+
 If you navigate to [https://package.elm-lang.org/](https://package.elm-lang.org/) you will see all current
 packages provide for elm 0.19.
 if you run
