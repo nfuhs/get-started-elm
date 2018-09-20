@@ -64,7 +64,7 @@ Inside the mcokserver folder create a named **db.json** and put the following JS
 
 Then let's create an folder for our App in move in it:
 
-``` mkdir elm-marvel```
+``` mkdir elm-movies```
 
 Then init the Elm project with:
 
