@@ -1,0 +1,11 @@
+{
+    "movie": [
+      {"id": 1, "title": "Terminator 1", "actor": "Arnold Schwarzenegger"},
+      {"id": 2, "title": "Terminator 2", "actor": "Arnold Schwarzenegger"}
+    ],
+    "quote": [
+      {"id": 1, "body": "I'll be back"},
+      {"id": 2, "body": "Hast la vista , baby"}
+    ],
+    "actor": { "name": "Arnold Schwarzenegger"}
+  }

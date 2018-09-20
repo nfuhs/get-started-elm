@@ -1,6 +1,7 @@
 ### Get started with Elm
 
-This is the source code for my Elm beginner tutorial how to get started with learning Elm and decode JSON with it to consume an API because this is usally the first step if you want to write an Single Page Application.
+This blopost is a short introduction to Elm and will teach you something about Elm weird parts for beginners, decoding JSON.
+who are familar with JavaScript and node.js in order to consume data via JSON REST responses from a third party API.  
 
 #### An short introduction to Elm 
 
@@ -10,7 +11,7 @@ In my view one the most interesting points is the Elm Architecture:
 
 ![Model-Update-View](img/Model-Update-View.png)
 
-This MUV pattern is always the same across all Elm apps once you understand this things like writing an SPA with elm will become very ease with Elm.
+This **MUV** pattern is always the same across all Elm apps once you understand this things like writing an SPA with elm will become very ease with Elm. 
 
 This is really a straightfoward concept in Elm and pretty similar to other reactive concepts like Facebook's [React](https://reactjs.org/) for example.
 
@@ -29,85 +30,99 @@ And it prints:
 
 ``` Hi, thank you for trying out Elm 0.19.0. I hope you like it! ```
 
-You're good to go. Enough talk,  lets get started to write some Elm,
-in this short tutorial we're gonna decode some JSON API calls and later turn this into an little app.
+You're good to go. Enough talk,  lets get started to write some Elm.
 
-#### Some basics about decoding JSON with Elm
+#### Create the folder of the node server
 
-If you have a JavaScript/node.js background you will probably ask why do we need to encode and
-decode JSON like in other languages since Elm is built upon node.js?
+First lets create the folder of the node based server:
 
-As pointed in the introduction Elm  is a complete other language to JavaScript so it also
-has a complete different representation to datastructures to JavaScript Objects which
-are commently used as data interchange format as [JSON](http://www.json.org/).
+``` mkdir mockserver ```
+
+Instead of using an real API we will mock an JSON Rest API with node.js by using [https://github.com/typicode/json-server](https://github.com/typicode/json-server)
+
+Install it by running:
+
+``` npm install -g json-server ```
+
+Inside the mcokserver folder create a named **db.json** and put the following JSON to it:
+[]()
+
+#### Create a folder for the App
+
+Then let's create an folder for our App in move in it:
+
+``` mkdir elm-marvel```
+
+Then init the Elm project with:
+
+``` elm init ```
 
 #### Install missing dependencies
-
 In order to run the Elm example app we're gonna built we need to install missing dependencies we need to write an program to decode JSON. 
 
 If you navigate to [https://package.elm-lang.org/](https://package.elm-lang.org/) you will see all current
-packages provide for elm 0.19.
-if you run
+packages provided for elm 0.19.
+
+In order to decode JSON we need the package elm/json:
 
 ``` elm package install elm/json ```
 
+#### Why do I need an JSON decoder?
 
-#### What we gonna build?
+A decoder is a function than can take a pice of JSON decode it into an Elm value, with a type that matches a type Elm knows about.
 
-``` elm 
+For example if we have this JSON:
 
-import Browser
-import Html exposing (Html, button, div, text)
-import Html.Events exposing (onClick)
+```{"Movie": "Terminator"} ```
 
+#### Finished Elm App
 
-main =
-  Browser.sandbox { init = init, update = update, view = view }
+``` elm
+module Data.JsonValue exposing (JsonValue(..), decoder)
 
+import Dict exposing (Dict)
+import elm/json.decoder as Decode
+    exposing
+        (Decoder
+        , dict
+        , string
+        , int
+        , float
+        , list
+        , null
+        , oneOf
+        , lazy
+        , map
+        , bool
+        )
 
--- MODEL
+type JsonValue
+    = JsonString string
+    | JsonInt Int
+    | JsonFloat float
+    | JsonArray (List JsonValue)
+    | JsonObject (Dict String JsonValue)
+    | JsonNull 
 
-type alias Model = Int
-
-init : Model
-init =
-  0
-
-
--- UPDATE
-
-type Msg = Increment | Decrement
-
-update : Msg -> Model -> Model
-update msg model =
-  case msg of
-    Increment ->
-      model + 1
-
-    Decrement ->
-      model - 1
-
-
--- VIEW
-
-view : Model -> Html Msg
-view model =
-  div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (String.fromInt model) ]
-    , button [ onClick Increment ] [ text "+" ]
-]
-
+decoder : Decoder JsonValue
+decoder =
+    oneOf
+    [ map JsonStringstring string
+    , map JsonInt int 
+    , map JsonFloat float
+    , map JsonBoolean bool
+    , list (lazy (\_ -> decoder)) |> map JsonArray
+    , dict (lazy (\_ -> decoder)) |> map JsonObject
+    , null JsonNull
+    ]
 ```
-#### Writing an JSON decoder
-
 
 #### Conclusion
 
 You learned how decode JSON with Elm and created an little app to consume API calls
 with it.
 
-If you're hooked right now I highly recommend reading and coding true the
+If you're hooked right now I highly recommend reading
 [Official Elm Introduction](https://guide.elm-lang.org/) and code trough all examples in [The Elm Architecture](The Elm Architecture).
 
 
