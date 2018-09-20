@@ -20,9 +20,7 @@ This is really a straightfoward concept in Elm and pretty similar to other react
 This tutorial asumes you have Elm and all it tools setup so if you haven't you first need install Elm,
 please follow the [Official Elm Introduction](https://guide.elm-lang.org/install.html) to do so.
 
-#### Check Elm is intalled correctly
-
-When you type:
+After this you can check that Elm is installed correctly:
 
 ```elm```
 
@@ -32,11 +30,13 @@ And it prints:
 
 You're good to go. Enough talk,  lets get started to write some Elm.
 
-#### Create the folder of the node server
+#### Create a project folder
 
-First lets create the folder of the node based server:
+Run
 
-``` mkdir mockserver ```
+```mkdir -p movies/{client,server}```
+
+to create an client folder and and server folder
 
 Instead of using an real API we will mock an JSON Rest API with node.js by using [https://github.com/typicode/json-server](https://github.com/typicode/json-server)
 
@@ -44,7 +44,7 @@ Install it by running:
 
 ``` npm install -g json-server ```
 
-Inside the mcokserver folder create a named **db.json** and put the following JSON to it:
+Inside the server folder create a JSON file named **db.json** and put the following into:
 
 ```json
 {
@@ -60,25 +60,47 @@ Inside the mcokserver folder create a named **db.json** and put the following JS
 }
 ```
 
-#### Create a folder for the App
+#### Begin the Elm App
 
-Then let's create an folder for our App in move in it:
-
-``` mkdir elm-movies```
-
-Then init the Elm project with:
+Move to the client folder and then init the Elm project with:
 
 ``` elm init ```
 
+The following prompt will show up:
+
+```sh
+Hello! Elm projects always start with an elm.json file. I can create them!
+
+Now you may be wondering, what will be in this file? How do I add Elm files to
+my project? How do I see it in the browser? How will my code grow? Do I need
+more directories? What about tests? Etc.
+
+Check out <https://elm-lang.org/0.19.0/init> for all the answers!
+
+Knowing all that, would you like me to create an elm.json file now? [Y/n]:
+```
+
+Answer with Yes and proceed by creating an elm.json file.
+
 #### Install missing dependencies
+
 In order to run the Elm example app we're gonna built we need to install missing dependencies we need to write an program to decode JSON. 
 
 If you navigate to [https://package.elm-lang.org/](https://package.elm-lang.org/) you will see all current
 packages provided for elm 0.19.
 
-In order to decode JSON we need the package elm/json:
+To decode JSON we need the package elm/json:
 
-``` elm package install elm/json ```
+``` elm install elm/json ```
+
+Another prompt will show up asking you to move the elm.json file to direct dependencies:
+
+```bash
+I found it in your elm.json file, but in the "indirect" dependencies.
+Should I move it into "direct" dependencies for more general use? [Y/n]:
+```
+
+Answer again with Yes and move on.
 
 #### Why do I need an JSON decoder?
 
@@ -87,6 +109,12 @@ A decoder is a function than can take a pice of JSON decode it into an Elm value
 For example if we have this JSON:
 
 ```{"Movie": "Terminator"} ```
+
+Now move on and create inside the client folder a file named Main.elm:
+
+``` touch Main.elm ```
+
+Inside the client directory create the 
 
 #### Finished Elm App
 
@@ -130,12 +158,31 @@ decoder =
     ]
 ```
 
+#### Run the JSON Server and the Elm App:
+
+Inside the server folder run the following command to start the JSON server:
+
+```json-server --watch db.json --port 5050```
+
+After this open another terminal and run inside the client folder:
+
+``` elm reactor ```
+
+After this open [http://localhost:8000/Main.elm](http://localhost:8000/Main.elm)
+ 
+Open the link and you should see your Elm app diplaying the JSON values inside your browser Congrats!
+
+### Turning Elm into an normal Single Page Application
+
+Inside the client folder create 
+
 #### Conclusion
 
-You learned how decode JSON with Elm and created an little app to consume API calls
-with it.
+This blogpost showed you how to decode JSON with Elm and created an little app to consume API calls with it.
 
-If you're hooked right now I highly recommend reading
+I hope you enjoyed reading it if so feel free to follow me on Twitter:
+
+If you're hooked right now I highly recommend reading the
 [Official Elm Introduction](https://guide.elm-lang.org/) and code trough all examples in [The Elm Architecture](The Elm Architecture).
 
 
