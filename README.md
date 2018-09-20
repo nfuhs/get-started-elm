@@ -182,8 +182,10 @@ This blogpost showed you how to decode JSON with Elm and created an little app t
 
 I hope you enjoyed reading it if so feel free to follow me on Twitter:
 
-If you're hooked right now I highly recommend reading the
-[Official Elm Introduction](https://guide.elm-lang.org/) and code trough all examples in [The Elm Architecture](https://guide.elm-lang.org/architecture/).
+If you're hooked right now I highly recommend reading:
 
+[The Official Elm Introduction](https://guide.elm-lang.org/) 
 
+and code through all examples in
 
+[The Elm Architecture](https://guide.elm-lang.org/architecture/)
