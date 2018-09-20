@@ -45,7 +45,20 @@ Install it by running:
 ``` npm install -g json-server ```
 
 Inside the mcokserver folder create a named **db.json** and put the following JSON to it:
-[]()
+
+```json
+{
+    "movie": [
+      {"id": 1, "title": "Terminator 1", "actor": "Arnold Schwarzenegger"},
+      {"id": 2, "title": "Terminator 2", "actor": "Arnold Schwarzenegger"}
+    ],
+    "quote": [
+      {"id": 1, "body": "I'll be back"},
+      {"id": 2, "body": "Hasta la vista , baby"}
+    ],
+    "actor": { "name": "Arnold Schwarzenegger"}
+}
+```
 
 #### Create a folder for the App
 
