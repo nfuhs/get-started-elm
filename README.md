@@ -5,15 +5,14 @@ who are familar with JavaScript and node.js in order to consume data via JSON RE
 
 #### An short introduction to Elm 
 
-Elm was created by Evan Czaplicki as his [thesis](https://www.seas.harvard.edu/sites/default/files/files/archived/Czaplicki.pdf) in 2012, Elm is a purely functional programming language for building web applications.
+To explain Elm in simply terms, Elm is a purely functional programming language for building webapps like Single Page Apps and other web applications.
+
 
 In my view one the most interesting points is the Elm Architecture:
 
 ![Model-Update-View](img/Model-Update-View.png)
 
-This **MUV** pattern is always the same across all Elm apps once you understand this things like writing an SPA with elm will become very ease with Elm. 
-
-This is really a straightfoward concept in Elm and pretty similar to other reactive concepts like Facebook's [React](https://reactjs.org/) for example.
+This **MUV** pattern is always the same across all Elm apps once you understand this things like writing an complex web-app will become much easier since you can always easily update basic ccomponents...  
 
 #### Install Elm and setup
 
@@ -44,20 +43,53 @@ Install it by running:
 
 ``` npm install -g json-server ```
 
-Inside the server folder create a JSON file named **db.json** and put the following into:
+Inside the server folder create a JSON file named **movies.json** and put the following into it:
 
 ```json
 {
-    "movie": [
-      {"id": 1, "title": "Terminator 1", "actor": "Arnold Schwarzenegger"},
-      {"id": 2, "title": "Terminator 2", "actor": "Arnold Schwarzenegger"}
-    ],
-    "quote": [
-      {"id": 1, "body": "I'll be back"},
-      {"id": 2, "body": "Hasta la vista , baby"}
-    ],
-    "actor": { "name": "Arnold Schwarzenegger"}
-}
+    "movies": [{
+      "title" : "The Terminator",
+      "year" : 1984,
+      "characters" : ["Terminator", "Kyle Reese", "Sarah Connor", "Lieutenant Ed Traxler", "Detective Hal Vukovich"],
+      "director" : "James Cameron"
+    },
+  
+    {
+      "title" : "Terminator 2 - Judgement Day",
+      "year" : 1991,
+      "characters" : ["Terminator", "Sarah Connor", "John Connor", "T-1000", "Myles Dyson"],
+      "director" : "James Cameron"
+    },
+  
+    {
+      "title" : "Terminator 3 - Rise of the Machines",
+      "year": 2003,
+      "characters" : ["Terminator", "John Connor", "Kate Brewster", "T-X", "Robert Brewster"],
+      "director" : "Jonathan Mostow"
+    },
+  
+    {
+      "title" : "Terminator - Salvation",
+      "year": 2009,
+      "characters" : ["John Connor", "Marcus Wright", "Blair Williams", "Dr. Serena Kogan", "Kyle Reese"],
+      "director" : "McG"
+    },
+  
+    {
+      "title" : "Terminator - Genisys",
+      "year":2015,
+      "characters" : ["Guardian", "Jon Connor", "Sarah Connor", "Kyle Reese", "O'Brien"],
+      "director" : "Alan Taylor"
+    },
+  
+    {
+      "title" : "Terminator 6 - Terminator Reboot",
+      "year":2019,
+      "characters" : ["The Terminator", "Grace", "Sarah Connor", "Terminator", "Dani Ramos"],
+      "director" : "Tim Miller"
+    }]
+  
+  }
 ```
 
 #### Begin the Elm App
@@ -82,7 +114,7 @@ Knowing all that, would you like me to create an elm.json file now? [Y/n]:
 
 ```
 
-Answer with Yes and proceed by creating an elm.json file.
+Answer with yes and proceed by creating an elm.json file.
 
 Now move on and create inside the client folder the file Main.elm:
 
@@ -116,17 +148,17 @@ We need to write an encode function and an decode function in order to represent
 
 Lets just assume we have the following JSON:
 
-```{"Movie": "Terminator"}```
+```"title" : "The Terminator"```
 
-In order to represent this JSON Oject in Elm we first need to import the elm.json.decoder
-from elm/json:
+In order to represent this JSON data in Elm we first need to
+import the elm.json.decoder from elm/json:
 
 ```elm
 
 module Movie exposing (Movie, encode, decoder)
 
-import Json.Decode as I
-import Json.Encode as J
+import Json.Decode as D
+import Json.Encode as E
 
 ```
 
@@ -137,14 +169,16 @@ Then we need to create a Model which is a representation of the JSON  Object in 
 type alias Movies =
 
 {
-movie : String
-, quote : String
-, actor : String
+movies : String
+, title : String
+, year : Int
+, main_characters : String
+, director : String 
 }
 
 ```
 
-Then we need the  write an encode function which lets us represent the data inside the view:
+Then we need the write an encode function which lets us represent the data inside the view:
 
 ```elm
 
@@ -160,10 +194,11 @@ After this we go on and write the decoder function so we can represent the data 
 
 decoder : D.Decoder Movie
 decoder =
-    D.map3 Movie
-    (D.field "movie" D.string)
-    (D.field "quote" D.string)
-    (D.field "actor" D.string)
+    D.map4 Movie
+    (D.field "title" D.string)
+    (D.field "year" D.Int)
+    (D.field "main_characters" D.string)
+    (D.field "director" D.string)
 
 ```
 
@@ -173,15 +208,17 @@ decoder =
 
 module Movie exposing (Movie, encode, decoder)
 
-import Json.Decode as I
-import Json.Encode as J
+import Json.Decode as D
+import Json.Encode as E
 
 type alias Movies =
 
 {
 movie : String
-, quote : String
-, actor : String
+, title : String
+, year : Int
+, characters : String
+, director : String
 }
 
 encode : Movie -> E.Value
@@ -190,10 +227,11 @@ E.object
 
 decoder : D.Decoder Movie
 decoder =
-    D.map3 Movie
-    (D.field "movie" D.string)
-    (D.field "quote" D.string)
-    (D.field "actor" D.string)
+    D.map4 Movie
+    (D.field "title" D.string)
+    (D.field "year" D.Int)
+    (D.field "characters" D.string)
+    (D.field "director" D.string)
 
 ```
 
@@ -245,19 +283,23 @@ decoder =
 
 Inside the server folder run the following command to start the JSON server:
 
-```json-server --watch db.json --port 5050```
+```json-server --watch movies.json --port 5050```
 
-After this open another terminal and run inside the client folder:
+Wait a second and json-server will serves our JSON file as resources under:
+
+[http://localhost:5050/movies](http://localhost:5050/movies) if you open this link
+
+you should see our JSON file with values in the browser.
+
+Now open another terminal and run inside the client folder:
 
 ``` elm reactor ```
 
+
 After this open [http://localhost:8000/Main.elm](http://localhost:8000/Main.elm)
  
-Open the link and you should see your Elm app diplaying the JSON values inside your browser Congrats!
+Open the link and you should see your Elm app diplaying the JSON file with values inside your elm-based client app.  Congrats!
 
-### Turning Elm into an normal Single Page Application
-
-Inside the client folder create 
 
 #### Conclusion
 
@@ -276,7 +318,7 @@ If you  want to know more about JSON decoders and Evan Czaplicki's vision of Elm
 [https://gist.github.com/evancz/1c5f2cf34939336ecb79b97bb89d9da6](https://gist.github.com/evancz/1c5f2cf34939336ecb79b97bb89d9da6)
 
 
-I hope you enjoyed reading it if so feel free to follow me on GitHub or Twitter:
+I hope you enjoyed reading it if so feel free to follow me on [GitHub](https://github.com/nfuhs) or [Twitter](https://twitter.com/NorbertFuhs)
 
 If you have any questions left just post an issue in the blogpost repo:
 
