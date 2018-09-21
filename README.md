@@ -66,11 +66,21 @@ Move to the client folder and then init the Elm project with:
 
 ``` elm init ```
 
-The following prompt will show that informs you that all Elm projects start
-with an Elm.json file and asks you to create one:
+Another prompt will show up asking you to move the elm.json file to direct dependencies:
 
+```
 
-```Knowing all that, would you like me to create an elm.json file now? [Y/n]:```
+Hello! Elm projects always start with an elm.json file. I can create them!
+
+Now you may be wondering, what will be in this file? How do I add Elm files to
+my project? How do I see it in the browser? How will my code grow? Do I need
+more directories? What about tests? Etc.
+
+Check out <https://elm-lang.org/0.19.0/init> for all the answers!
+
+Knowing all that, would you like me to create an elm.json file now? [Y/n]:
+
+```
 
 Answer with Yes and proceed by creating an elm.json file.
 
@@ -88,29 +98,23 @@ To decode JSON we need the package **elm/json**:
 
 ``` elm install elm/json ```
 
-Another prompt will show up asking you to move the elm.json file to direct dependencies:
+
+Another prompt will show up:
 
 ```
 
-Hello! Elm projects always start with an elm.json file. I can create them!
-
-Now you may be wondering, what will be in this file? How do I add Elm files to
-my project? How do I see it in the browser? How will my code grow? Do I need
-more directories? What about tests? Etc.
-
-Check out <https://elm-lang.org/0.19.0/init> for all the answers!
-
-Knowing all that, would you like me to create an elm.json file now? [Y/n]:
+I found it in your elm.json file, but in the "indirect" dependencies.
+Should I move it into "direct" dependencies for more general use? [Y/n]: 
 
 ```
 
-Answer again with Yes and move on.
+Answer again with yes so you can use elm/json directly in the client app.
 
 #### Why do I need an JSON decoder?
 
-We neeed to write an encode function and an decode function in order to represent the JSON data in our Elm app.
+We need to write an encode function and an decode function in order to represent the JSON data in our Elm app.
 
-Lets just asume we have following JSON:
+Lets just assume we have the following JSON:
 
 ```{"Movie": "Terminator"}```
 
@@ -140,7 +144,7 @@ movie : String
 
 ```
 
-Then we need the  write an Encode function which lets us represent the data inside the view:
+Then we need the  write an encode function which lets us represent the data inside the view:
 
 ```elm
 
