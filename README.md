@@ -157,8 +157,14 @@ import the elm.json.decoder from elm/json:
 
 module Movie exposing (Movie, encode, decoder)
 
-import Json.Decode as D
-import Json.Encode as E
+import Json.Decode exposing (Decoder, field, string)
+
+titleDecoder : Decoder String
+titleDecoder =
+
+field "title" String
+
+
 
 ```
 
