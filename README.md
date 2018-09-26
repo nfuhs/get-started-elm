@@ -14,17 +14,11 @@ runtime errors running an Elm application or other [wierd parts](https://github.
 
 Since Elm programs can be compiled directly to JavaScript you see you have all the advantages of a pure functional programminglanguage which makes it perfect for developing large web applications. Elm is not the only language that compiles to JavaScript there are also projects like [TypeScript](https://www.typescriptlang.org/) , [Reason](https://reasonml.github.io/) and [ClojureScript](https://clojurescript.org/) just to mention a few.
 
-In my view one the most interesting parts is the Elm architecture which structure unlike using the latest JavaScript framework changes at daily basis.
+In my view one the most interesting parts is the Elm architecture which structure unlike using the latest JavaScript framework doesn't change ever. We will discuss this architecture further when we begin to write the client app.
 
 ![Depressed-developer](img/depressed-developer-small.png)
+&copy; Daniel Stori
 
-
-#### The Elm App structure
-
-
-![Model-Update-View](img/Model-Update-View.png)
-
-This **MUV** pattern is always the same across all Elm apps once you understand this things like writing an complex web-app will become much easier since you can always easily update basic ccomponents...  
 
 #### Install Elm and setup
 
@@ -104,6 +98,16 @@ Inside the server folder create a JSON file named **movies.json** and put the fo
   }
 ```
 
+#### The structure of the app
+
+As mentioned before all Elm apps aare structered afeter the **MUV** pattern:
+
+
+![Model-Update-View](img/Model-Update-View.png)
+
+
+This **MUV** pattern is always the same across all Elm apps once you understand this things like writing an complex web-app will become much easier since you can always easily update all components of the client app.
+
 #### Begin the Elm App
 
 Move to the client folder and then init the Elm project with:
@@ -154,11 +158,23 @@ Should I move it into "direct" dependencies for more general use? [Y/n]:
 
 Answer again with yes so you can use elm/json directly in the client app.
 
+Now you should have a the following folders and files present in your client folder:
+
+
+├── client
+│   ├── elm.json
+│   ├── Main.elm
+│   └── src
+└── server
+    └── movies.json
+
+
+
 #### Why do I need an JSON decoder?
 
 We need to write an encode function and an decode function in order to represent the JSON data in our Elm app.
 
-Lets just assume we have the following JSON:
+Let's just assume we have the following JSON:
 
 ```"title" : "The Terminator"```
 
