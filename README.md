@@ -16,8 +16,12 @@ Since Elm programs can be compiled directly to JavaScript you see you have all t
 
 In my view one the most interesting parts is the Elm architecture which structure unlike using the latest JavaScript framework doesn't change ever. We will discuss this architecture further when we begin to write the client app.
 
-![Depressed-developer](img/depressed-developer-small.png)
-&copy; Daniel Stori
+
+<p align="center">
+<img src="img/depressed-developer-small.png">
+<p align="center">&copy; Daniel Stori
+</p>
+
 
 
 #### Install Elm and setup
@@ -100,11 +104,9 @@ Inside the server folder create a JSON file named **movies.json** and put the fo
 
 #### The structure of the app
 
-As mentioned before all Elm apps aare structered afeter the **MUV** pattern:
-
+As mentioned before all Elm apps are structered after the **MUV** pattern:
 
 ![Model-Update-View](img/Model-Update-View.png)
-
 
 This **MUV** pattern is always the same across all Elm apps once you understand this things like writing an complex web-app will become much easier since you can always easily update all components of the client app.
 
@@ -158,6 +160,7 @@ Should I move it into "direct" dependencies for more general use? [Y/n]:
 Answer again with yes so you can use elm/json directly in the client app.
 
 Now you should have a the following folders and files present in your client folder:
+
 
 ```
 ├── client
