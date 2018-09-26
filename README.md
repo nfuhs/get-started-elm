@@ -1,4 +1,4 @@
-### Get started with Elm
+### Geting started with Elm
 
 This blopost is a short introduction to Elm and will teach you something about Elm weird parts for beginners, decoding JSON.
 who are familar with JavaScript and node.js in order to consume data via JSON REST responses from a third party API.  
@@ -7,8 +7,20 @@ who are familar with JavaScript and node.js in order to consume data via JSON RE
 
 To explain Elm in simply terms, Elm is a purely functional programming language for building webapps like Single Page Apps and other web applications.
 
+The [Elm compiler](https://github.com/elm/compiler)  itself is implemented in [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language)) which itself is a compiled general-purpose purely functional programming language.
 
-In my view one the most interesting points is the Elm Architecture:
+Since Elm is like Haskell a functional programming language you'll never see
+runtime errors running an Elm application or other [wierd parts](https://github.com/denysdovhan/wtfjs) of JavaScript.
+
+Since Elm programs can be compiled directly to JavaScript you see you have all the advantages of a pure functional programminglanguage which makes it perfect for developing large web applications. Elm is not the only language that compiles to JavaScript there are also projects like [TypeScript](https://www.typescriptlang.org/) , [Reason](https://reasonml.github.io/) and [ClojureScript](https://clojurescript.org/) just to mention a few.
+
+In my view one the most interesting parts is the Elm architecture which structure unlike using the latest JavaScript framework changes at daily basis.
+
+![Depressed-developer](img/depressed-developer-small.png)
+
+
+#### The Elm App structure
+
 
 ![Model-Update-View](img/Model-Update-View.png)
 
