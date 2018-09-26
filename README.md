@@ -146,7 +146,6 @@ To decode JSON we need the package **elm/json**:
 
 ``` elm install elm/json ```
 
-
 Another prompt will show up:
 
 ```
@@ -160,14 +159,14 @@ Answer again with yes so you can use elm/json directly in the client app.
 
 Now you should have a the following folders and files present in your client folder:
 
-
+```
 ├── client
 │   ├── elm.json
 │   ├── Main.elm
 │   └── src
 └── server
     └── movies.json
-
+```
 
 
 #### Why do I need an JSON decoder?
