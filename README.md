@@ -1,18 +1,18 @@
 ### Getting started with Elm
 
 This blopost is a short introduction to Elm and will teach you something about Elm weird parts for beginners, decoding JSON.
-who are familar with JavaScript and node.js in order to consume data via JSON REST responses from a third party API.  
+who are familiar with JavaScript and node.js in order to consume data via JSON REST responses from a third party API.  
 
 #### An short introduction to Elm 
 
-To explain Elm in simply terms, Elm is a purely functional programming language for building webapps like Single Page Apps and other web applications.
+To explain Elm in simply terms, Elm is a purely functional programming language for building web apps like Single Page Apps and other web applications.
 
 The [Elm compiler](https://github.com/elm/compiler)  itself is implemented in [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language)) which itself is a compiled general-purpose purely functional programming language.
 
 Like Haskell Elm is a functional programming language and you'll never see
-runtime errors running an Elm application or other [wierd parts](https://github.com/denysdovhan/wtfjs) of JavaScript.
+runtime errors running an Elm application or other [weird parts](https://github.com/denysdovhan/wtfjs) of JavaScript.
 
-Since Elm programs can be compiled directly to JavaScript you see you have all the advantages of a pure functional programminglanguage which makes it perfect for developing large web applications. Elm is not the only language that compiles to JavaScript there are also projects like [TypeScript](https://www.typescriptlang.org/) , [Reason](https://reasonml.github.io/) and [ClojureScript](https://clojurescript.org/) just to mention a few.
+Since Elm programs can be compiled directly to JavaScript you see you have all the advantages of a pure functional programming language which makes it perfect for developing large web applications. Elm is not the only language that compiles to JavaScript there are also projects like [TypeScript](https://www.typescriptlang.org/) , [Reason](https://reasonml.github.io/) and [ClojureScript](https://clojurescript.org/) just to mention a few.
 
 In my view one the most interesting parts is the Elm architecture which structure unlike using the latest JavaScript framework doesn't change ever. We will discuss this architecture further when we begin to write the client app.
 
@@ -26,7 +26,7 @@ In my view one the most interesting parts is the Elm architecture which structur
 
 #### Install Elm and setup
 
-This tutorial asumes you have Elm and all it tools setup so if you haven't you first need install Elm,
+This tutorial assumes you have Elm and all it tools setup so if you haven't you first need install Elm,
 please follow the [Official Elm Introduction](https://guide.elm-lang.org/install.html) to do so.
 
 After this you can check that Elm is installed correctly:
@@ -104,7 +104,7 @@ Inside the server folder create a JSON file named **movies.json** and put the fo
 
 #### The structure of the app
 
-As mentioned before all Elm apps are structered after the **MUV** pattern:
+As mentioned before all Elm apps are structured after the **MUV** pattern:
 
 ![Model-Update-View](img/Model-Update-View.png)
 
@@ -202,8 +202,8 @@ If you open the Main.elm file from the project folder this little app will show 
 
 If you click at the upper button the number will get lower if you click the upper button the number will get higher.
 
-As you can see the Elm reactor compiles your Elm apps and lets you run and debug them in your the browser. This is pretty handy because if youu make an error you'll get noticed and
-see an pretty detailed error message  with suggestions howto corect your error.
+As you can see the Elm reactor compiles your Elm apps and lets you run and debug them in your the browser. This is pretty handy because if you make an error you'll get noticed and
+see an pretty detailed error message  with suggestions how to correct your error.
 
 Go now to the first line of our Main.elm file and change the following line:
 
@@ -222,14 +222,28 @@ Reload your browser and you should see the following error message:
 
 ![elm-error](img/elm-error.png)
 
-As you  can see Elm even makes suggesst that there is obviously an typo in our Main.elm file. I fyou ever tried to debug an Node.js application
+As you  can see Elm even makes suggests that there is obviously an typo in our Main.elm file. If you ever tried to debug an Node.js application
 or any other large app you will sure see the value of this.
 
-For now close hthe browser,  **delete** all stuff that is in the Main.elm file and close the elm reactor by running **CTRL**+**D**
+#### What happened here exactly?
+
+Let's dig deeper into the code of the Main.elm file to make sure you understand Elm's underlying concepts before we move on:
+
+```elm
+
+
+```
+
+
+ 
+
+For now close the browser, **delete** all stuff that is in the Main.elm file and close the elm reactor by running **CTRL**+**D**
+
+#### Starting an App to display JSON in the browser
 
 #### Install missing dependencies
 
-In order to run the Elm example app we're gonna built we need to install missing dependencies as we need to write an program to encode and decode JSON. 
+In order to run the Elm app we gonna built we need to install missing dependencies as we need to write an program to encode and decode JSON. 
 
 If you navigate to [https://package.elm-lang.org/](https://package.elm-lang.org/) you will see all current packages provided for elm 0.19.
 
@@ -269,6 +283,8 @@ Let's just assume we have the following JSON:
 
 ```"title" : "The Terminator"```
 
+Elm itself isN't related to JavaScript or its Objects, Elm itself represents Data as 
+
 In order to represent this JSON data in Elm we first need to
 import the elm.json.decoder from elm/json:
 
@@ -287,7 +303,7 @@ field "title" String
 
 ```
 
-Then we need to create a Model which is a representation of the JSON  Object in Elm:
+Then we need to create a Model which is a representation of the JSON Object in Elm:
 
 ```elm
 
@@ -420,12 +436,14 @@ Now open another terminal and run elm reactor again inside the client folder:
 
 [http://localhost:8000/Main.elm](http://localhost:8000/Main.elm)
  
-Open the link and you should see your Elm app diplaying the JSON file with values inside your elm-based client app.  Congrats!
+Open the link and you should see your Elm app displaying the JSON file with values inside your elm-based client app.  Congrats!
 
 
 #### Conclusion
 
 This blogpost showed you how to decode JSON with Elm and created an little app to consume API calls with it.
+
+example
 
 If you're hooked right now I highly recommend reading:
 
