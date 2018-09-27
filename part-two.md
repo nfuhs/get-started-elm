@@ -1,4 +1,4 @@
-#### PART 2?
+####WIP PART 2
 
 For now close the browser, **delete** all stuff that is in the Main.elm file and close the elm reactor by running **CTRL**+**D**
 
