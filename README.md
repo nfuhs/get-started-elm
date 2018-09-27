@@ -1,7 +1,6 @@
 ### Getting started with Elm
 
-This blog post will give you a short introduction to Elm and will teach you something about Elm weird parts for beginners, decoding JSON.
-who are familiar with JavaScript and node.js in order to consume data via JSON REST responses from a third party API.  
+This blog post will give you a short introduction to Elm and will teach you something about Elm weird parts encoding and decoding JSON. 
 
 #### An short introduction to Elm 
 
