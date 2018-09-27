@@ -1,6 +1,6 @@
 ### Getting started with Elm
 
-This blopost is a short introduction to Elm and will teach you something about Elm weird parts for beginners, decoding JSON.
+This blog post will give you a short introduction to Elm and will teach you something about Elm weird parts for beginners, decoding JSON.
 who are familiar with JavaScript and node.js in order to consume data via JSON REST responses from a third party API.  
 
 #### An short introduction to Elm 
@@ -441,7 +441,7 @@ Open the link and you should see your Elm app displaying the JSON file with valu
 
 #### Conclusion
 
-This blogpost showed you how to decode JSON with Elm and created an little app to consume API calls with it.
+This blog post showed you how to decode JSON with Elm and created an little app to consume API calls with it.
 
 example
 
@@ -460,6 +460,6 @@ If you  want to know more about JSON decoders and Evan Czaplicki's vision of Elm
 
 I hope you enjoyed reading it if so feel free to follow me on [GitHub](https://github.com/nfuhs) or [Twitter](https://twitter.com/NorbertFuhs)
 
-If you have any questions left just post an issue in the blogpost repo:
+If you have any questions left just post an issue in this repository:
 
 [https://github.com/nfuhs/get-started-elm](https://github.com/nfuhs/get-started-elm)
