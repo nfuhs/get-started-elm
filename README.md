@@ -9,7 +9,7 @@ To explain Elm in simply terms, Elm is a purely functional programming language 
 
 The [Elm compiler](https://github.com/elm/compiler)  itself is implemented in [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language)) which itself is a compiled general-purpose purely functional programming language.
 
-Since Elm is like Haskell a functional programming language you'll never see
+Like Haskell Elm is a functional programming language and you'll never see
 runtime errors running an Elm application or other [wierd parts](https://github.com/denysdovhan/wtfjs) of JavaScript.
 
 Since Elm programs can be compiled directly to JavaScript you see you have all the advantages of a pure functional programminglanguage which makes it perfect for developing large web applications. Elm is not the only language that compiles to JavaScript there are also projects like [TypeScript](https://www.typescriptlang.org/) , [Reason](https://reasonml.github.io/) and [ClojureScript](https://clojurescript.org/) just to mention a few.
@@ -138,6 +138,95 @@ Now move on and create inside the client folder the file Main.elm:
 
 ``` touch Main.elm ```
 
+Inside the Main.elm file put the following code in it, as you can see it is the famous hello world sample from the elm:
+
+```elm
+import Browser
+import Html exposing (Html, button, div, text)
+import Html.Events exposing (onClick)
+
+
+main =
+  Browser.sandbox { init = init, update = update, view = view }
+
+
+-- MODEL
+
+type alias Model = Int
+
+init : Model
+init =
+  0
+
+
+-- UPDATE
+
+type Msg = Increment | Decrement
+
+update : Msg -> Model -> Model
+update msg model =
+  case msg of
+    Increment ->
+      model + 1
+
+    Decrement ->
+      model - 1
+
+
+-- VIEW
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (String.fromInt model) ]
+    , button [ onClick Increment ] [ text "+" ]
+    ]
+```
+
+#### The Elm reactor
+
+Now run the following command inside the client folder
+
+``` elm reactor ```
+
+Now navigate to [http://localhost:8000](http://localhost:8000)
+
+This will open the project dashboard:
+
+![elm-project-nav](img/elm-project-nav.png)
+
+If you open the Main.elm file from the project folder this little app will show up:
+
+![elm-buttons](img/elm-buttons.png)
+
+If you click at the upper button the number will get lower if you click the upper button the number will get higher.
+
+As you can see the Elm reactor compiles your Elm apps and lets you run and debug them in your the browser. This is pretty handy because if youu make an error you'll get noticed and
+see an pretty detailed error message  with suggestions howto corect your error.
+
+Go now to the first line of our Main.elm file and change the following line:
+
+```elm
+import Browser
+```
+
+to 
+
+```elm
+import Bowser
+```
+
+Reload your browser and you should see the following error message:
+
+
+![elm-error](img/elm-error.png)
+
+As you  can see Elm even makes suggesst that there is obviously an typo in our Main.elm file. I fyou ever tried to debug an Node.js application
+or any other large app you will sure see the value of this.
+
+For now close hthe browser,  **delete** all stuff that is in the Main.elm file and close the elm reactor by running **CTRL**+**D**
+
 #### Install missing dependencies
 
 In order to run the Elm example app we're gonna built we need to install missing dependencies as we need to write an program to encode and decode JSON. 
@@ -171,10 +260,6 @@ Now you should have a the following folders and files present in your client fol
     └── movies.json
 ```
 
-If you now run elm reactor inside the client folder 
-The elm reactor will open an the project dashboard:
-
-![elm-project-nav](img/elm-project-nav.png)
 
 #### Why do I need an JSON decoder?
 
@@ -331,13 +416,7 @@ Wait a second and json-server will serves our JSON file as resources under:
 
 Open this link and you should see our JSON file with values in the browser.
 
-Now open another terminal and run inside the client folder:
-
-``` elm reactor ```
-
-The elm reactor will open an the project dashboard:
-
-
+Now open another terminal and run elm reactor again inside the client folder:
 
 [http://localhost:8000/Main.elm](http://localhost:8000/Main.elm)
  
