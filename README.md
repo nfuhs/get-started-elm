@@ -323,9 +323,9 @@ Inside the server folder run the following command to start the JSON server:
 
 Wait a second and json-server will serves our JSON file as resources under:
 
-[http://localhost:5050/movies](http://localhost:5050/movies) if you open this link
+[http://localhost:5050/movies](http://localhost:5050/movies) 
 
-you should see our JSON file with values in the browser.
+Open this link and you should see our JSON file with values in the browser.
 
 Now open another terminal and run inside the client folder:
 
