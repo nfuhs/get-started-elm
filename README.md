@@ -108,7 +108,7 @@ As mentioned before all Elm apps are structered after the **MUV** pattern:
 
 ![Model-Update-View](img/Model-Update-View.png)
 
-This **MUV** pattern is always the same across all Elm apps once you understand this things like writing an complex web-app will become much easier since you can always easily update all components of the client app.
+This **MUV** pattern is always the same across all Elm apps once you understand this  writing an complex web-app will become much easier since you can always update all components like in our client app with ease.
 
 #### Begin the Elm App
 
