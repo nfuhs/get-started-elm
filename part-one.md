@@ -35,15 +35,6 @@ And it prints:
 You're good to go. Enough talk,  lets get started to write some Elm.
 
 
-
-#### The structure of the app
-
-As mentioned before all Elm apps are structured after the **MUV** pattern:
-
-![Model-Update-View](img/Model-Update-View.png)
-
-This **MUV** pattern is always the same across all Elm apps once you understand this  writing an complex web-app will become much easier since you can always update all components like in our  app with ease.
-
 #### Begin the Elm App
 
 Move to the client folder and then init the Elm project with:
@@ -72,7 +63,17 @@ Now move on and create inside the client folder the file Main.elm:
 
 ``` touch Main.elm ```
 
-Inside the Main.elm file put the following code in it, as you can see it is the famous hello world example from the elm:
+You should now have the following folder structure inside your project folder:
+
+```
+
+├── elm.json
+├── Main.elm
+└── src
+
+```
+
+Open the Main.elm file and put the following code in it:
 
 ```elm
 import Browser
@@ -117,6 +118,8 @@ view model =
     , button [ onClick Increment ] [ text "+" ]
     ]
 ```
+
+Now save the file and stay inside your projects folder. 
 
 #### The Elm reactor
 
@@ -155,12 +158,21 @@ Reload your browser and you should see the following error message:
 
 ![elm-error](img/elm-error.png)
 
-As you  can see Elm even makes suggests that there is obviously an typo in our Main.elm file. If you ever tried to debug an Node.js application
+As you  can see Elm even suggests that there is obviously an typo in our Main.elm file. If you ever tried to debug an Node.js application
 or any other large app you will sure see the value of this.
 
 #### What happened here exactly?
 
 Let's dig deeper into the code of the Main.elm file to make sure you understand Elm's underlying concepts before we move on:
+
+#### The structure of an Elm app
+
+Elm apps are structured after the **MUV** pattern:
+
+![Model-Update-View](img/Model-Update-View.png)
+
+This **MUV** pattern is always the same across all Elm apps once you understand this writing an complex web-app will become much easier since you can always update all components like in our app with ease.
+
 
 ```elm
 import Browser
@@ -168,8 +180,8 @@ import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
 ```
 
-At the first few lines we see what we would expect at any other programming language like for example Python we import the needed Elm packages to run this basic app,
-elm/Browser and HTML are included in Elm's standard packages so we can use them directly.
+At the first few lines we see what we would expect at any other programming language like for example Python we import the needed Elm packages to run this basic app, elm/Browser and HTML are included in Elm's standard packages so we can use them directly.
+
 
 If you look closely you'll notice all the elements we use in the elm example after exposing
 
@@ -178,14 +190,14 @@ main =
   Browser.sandbox { init = init, update = update, view = view }
 ```
 
+Browser.sandbox is required to run our app inside the browser an sandbox takes care that our program can only run inside the browser and not communicate with the outside world.Lets concentrate more on the underlying parts inside our Elm app.
+
 The main is the entry point of every Elm program and has beside Browser.sandbox an quiet interesting part in it:
 
 ``` { init = init, update = update, view = view } ```
 
-This is basically the control flow of our Elm app. The init function initializes the Model , the Update function Updates our Model and the View if something changes in our app state and
+This is basically the control-flow of our Elm app. The init function initializes the Model , the Update function Updates our Model and the View if something changes in our app state and
 the view defines how our data will be displayed in the browser.  
-
-####TODO Explain further
 
 #### The M in MUV
 
@@ -199,11 +211,9 @@ init =
   0
 ```
 
-Here we define Model of our app and as you can see we use an type alias here.
-Why do we need an type alias?
-####TODO Explain further
+Here we define the Model of our app and as you can see we use an type alias here but why do we need an type alias you ask? As mentioned earlier 
 
-####The U in MUV
+#### The U in MUV
 
 ```elm
 -- UPDATE
@@ -219,9 +229,10 @@ update msg model =
     Decrement ->
       model - 1
 ```
+
 Elm programs share their state by sending messages via functions you may heard about the term [Message Passing](https://en.wikipedia.org/wiki/Message_passing) in Object oriented programming languages like Java and C# or the [The Actor Model](https://en.wikipedia.org/wiki/Actor_model) used by other functional programming languages like Erlang.
 
-#####The V in MUV
+##### The V in MUV
 
 ```elm
 -- VIEW
@@ -240,9 +251,26 @@ which then updates our model and sends the state back to view.
 
 This is the basic
 
+#### How do I run my Elm app as a normal web app?
+
+Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary JavaScript app.
+
+Move into your src director and create an index.html file in it.
+
+``` index.html ```
+
+The put the following HTML inside it:
+```HTML
+
+```
+
+#### Running Elm make
+
+``` elm make Main.elm --output=main.html ```
+
 #### Conclusion
 
-This blog post gave you an short introduction to Elm in the next part we will take a look further at on of the weird parts in Elm and learn howto decode JSON with it.
+This blog post gave you an short introduction to Elm in the next part we will take a look further at on of the weird parts in Elm and learn how we decode JSON with it.
 
 If you're hooked right now I highly recommend reading:
 
@@ -251,7 +279,6 @@ If you're hooked right now I highly recommend reading:
 and code through all examples in
 
 [The Elm Architecture](https://guide.elm-lang.org/architecture/)
-
 
 I hope you enjoyed reading it if so feel free to follow me on [GitHub](https://github.com/nfuhs) or [Twitter](https://twitter.com/NorbertFuhs)
 
