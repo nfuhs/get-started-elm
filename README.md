@@ -278,7 +278,7 @@ Let's just assume we have the following JSON:
 
 ```"title" : "The Terminator"```
 
-Elm itself isN't related to JavaScript or its Objects, Elm itself represents Data as 
+Elm itself isn't related to JavaScript or its Objects, Elm itself represents Data as 
 
 In order to represent this JSON data in Elm we first need to
 import the elm.json.decoder from elm/json:
