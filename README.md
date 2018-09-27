@@ -4,11 +4,7 @@ This blog post will give you a short introduction to Elm and will teach you some
 
 #### An short introduction to Elm 
 
-To explain Elm in simply terms, Elm is a purely functional programming language for building web apps like Single Page Apps and other web applications.
-
-The [Elm compiler](https://github.com/elm/compiler)  itself is implemented in [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language)) which itself is a compiled general-purpose purely functional programming language.
-
-Like Haskell Elm is a functional programming language and you'll never see
+To explain Elm in simply terms, Elm is a purely functional programming language for building web apps like Single Page Apps and other web applications. The [Elm compiler](https://github.com/elm/compiler)  itself is implemented in [Haskell](https://en.wikipedia.org/wiki/Haskell_(programming_language)) which itself is a compiled general-purpose purely functional programming language. Like Haskell Elm is a functional programming language and you'll never see
 runtime errors running an Elm application or other [weird parts](https://github.com/denysdovhan/wtfjs) of JavaScript.
 
 Since Elm programs can be compiled directly to JavaScript you see you have all the advantages of a pure functional programming language which makes it perfect for developing large web applications. Elm is not the only language that compiles to JavaScript there are also projects like [TypeScript](https://www.typescriptlang.org/) , [Reason](https://reasonml.github.io/) and [ClojureScript](https://clojurescript.org/) just to mention a few.
