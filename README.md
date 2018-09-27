@@ -133,7 +133,7 @@ Now move on and create inside the client folder the file Main.elm:
 
 ``` touch Main.elm ```
 
-Inside the Main.elm file put the following code in it, as you can see it is the famous hello world sample from the elm:
+Inside the Main.elm file put the following code in it, as you can see it is the famous hello world example from the elm:
 
 ```elm
 import Browser
@@ -195,7 +195,7 @@ If you open the Main.elm file from the project folder this little app will show 
 
 ![elm-buttons](img/elm-buttons.png)
 
-If you click at the upper button the number will get lower if you click the upper button the number will get higher.
+If you click at the minus button the number will get lower if you click the plus button the number will get higher.
 
 As you can see the Elm reactor compiles your Elm apps and lets you run and debug them in your the browser. This is pretty handy because if you make an error you'll get noticed and
 see an pretty detailed error message  with suggestions how to correct your error.
