@@ -1,4 +1,4 @@
-### Getting started with Elm
+## Getting started with Elm
 
 This blog post will give you a short introduction to Elm and will teach you something about Elm weird parts encoding and decoding JSON. 
 
@@ -34,68 +34,7 @@ And it prints:
 
 You're good to go. Enough talk,  lets get started to write some Elm.
 
-#### Create a project folder
 
-To create an client folder and and server folder run:
-
-```mkdir -p movies/{client,server}```
-
-Instead of using an real API we will mock an JSON Rest API with node.js by using
-
-[https://github.com/typicode/json-server](https://github.com/typicode/json-server)
-
-Install it by running:
-
-``` npm install -g json-server ```
-
-Inside the server folder create a JSON file named **movies.json** and put the following into it:
-
-```json
-{
-    "movies": [{
-      "title" : "The Terminator",
-      "year" : 1984,
-      "characters" : ["Terminator", "Kyle Reese", "Sarah Connor", "Lieutenant Ed Traxler", "Detective Hal Vukovich"],
-      "director" : "James Cameron"
-    },
-  
-    {
-      "title" : "Terminator 2 - Judgement Day",
-      "year" : 1991,
-      "characters" : ["Terminator", "Sarah Connor", "John Connor", "T-1000", "Myles Dyson"],
-      "director" : "James Cameron"
-    },
-  
-    {
-      "title" : "Terminator 3 - Rise of the Machines",
-      "year": 2003,
-      "characters" : ["Terminator", "John Connor", "Kate Brewster", "T-X", "Robert Brewster"],
-      "director" : "Jonathan Mostow"
-    },
-  
-    {
-      "title" : "Terminator - Salvation",
-      "year": 2009,
-      "characters" : ["John Connor", "Marcus Wright", "Blair Williams", "Dr. Serena Kogan", "Kyle Reese"],
-      "director" : "McG"
-    },
-  
-    {
-      "title" : "Terminator - Genisys",
-      "year":2015,
-      "characters" : ["Guardian", "Jon Connor", "Sarah Connor", "Kyle Reese", "O'Brien"],
-      "director" : "Alan Taylor"
-    },
-  
-    {
-      "title" : "Terminator 6 - Terminator Reboot",
-      "year":2019,
-      "characters" : ["The Terminator", "Grace", "Sarah Connor", "Terminator", "Dani Ramos"],
-      "director" : "Tim Miller"
-    }]
-  
-  }
-```
 
 #### The structure of the app
 
@@ -225,16 +164,152 @@ or any other large app you will sure see the value of this.
 Let's dig deeper into the code of the Main.elm file to make sure you understand Elm's underlying concepts before we move on:
 
 ```elm
-
-
+import Browser
+import Html exposing (Html, button, div, text)
+import Html.Events exposing (onClick)
 ```
 
+At the first few lines we see what we would expect at any other programming language like for example Python we import the needed Elm packages to run this basic app,
+elm/Browser and HTML are included in Elm's standard packages so we can use them directly.
 
- 
+If you look closely you'll notice all the elements we use in the elm example after exposing
+
+```elm
+main =
+  Browser.sandbox { init = init, update = update, view = view }
+```
+
+The main is the entry point of every Elm program and has beside Browser.sandbox an quiet interesting part in it:
+
+``` { init = init, update = update, view = view } ```
+
+This is basically the control flow of our Elm app. The init function initializes the Model , the Update function Updates our Model and the View if something changes in our app state and
+the view defines how our data will be displayed in the browser.  
+
+####TODO Explain further
+
+#### The M in MUV
+
+```elm
+-- MODEL
+
+type alias Model = Int
+
+init : Model
+init =
+  0
+```
+
+Here we define Model of our app and as you can see we use an type alias here.
+Why do we need an type alias?
+####TODO Explain further
+
+####The U in MUV
+
+```elm
+-- UPDATE
+
+type Msg = Increment | Decrement
+
+update : Msg -> Model -> Model
+update msg model =
+  case msg of
+    Increment ->
+      model + 1
+
+    Decrement ->
+      model - 1
+```
+Elm programs share their state by sending messages via functions you may heard about the term [Message Passing](https://en.wikipedia.org/wiki/Message_passing) in Object oriented programming languages like Java and C# or the [The Actor Model](https://en.wikipedia.org/wiki/Actor_model) used by other functional programming languages like Erlang.
+
+#####The V in MUV
+
+```elm
+-- VIEW
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ button [ onClick Decrement ] [ text "-" ]
+    , div [] [ text (String.fromInt model) ]
+    , button [ onClick Increment ] [ text "+" ]
+    ]
+```
+
+View model defines our content which should be displayed in the browser and as you can see also takes our functions Decrement and Increment and send it  back  to the update function,
+which then updates our model and sends the state back to view. 
+
+This is the basic
+
+
+#### PART 2?
 
 For now close the browser, **delete** all stuff that is in the Main.elm file and close the elm reactor by running **CTRL**+**D**
 
 #### Starting an App to display JSON in the browser
+
+#### Create a project folder
+
+To create an client folder and and server folder run:
+
+```mkdir -p movies/{client,server}```
+
+Instead of using an real API we will mock an JSON Rest API with node.js by using
+
+[https://github.com/typicode/json-server](https://github.com/typicode/json-server)
+
+Install it by running:
+
+``` npm install -g json-server ```
+
+Inside the server folder create a JSON file named **movies.json** and put the following into it:
+
+```json
+{
+    "movies": [{
+      "title" : "The Terminator",
+      "year" : 1984,
+      "characters" : ["Terminator", "Kyle Reese", "Sarah Connor", "Lieutenant Ed Traxler", "Detective Hal Vukovich"],
+      "director" : "James Cameron"
+    },
+  
+    {
+      "title" : "Terminator 2 - Judgement Day",
+      "year" : 1991,
+      "characters" : ["Terminator", "Sarah Connor", "John Connor", "T-1000", "Myles Dyson"],
+      "director" : "James Cameron"
+    },
+  
+    {
+      "title" : "Terminator 3 - Rise of the Machines",
+      "year": 2003,
+      "characters" : ["Terminator", "John Connor", "Kate Brewster", "T-X", "Robert Brewster"],
+      "director" : "Jonathan Mostow"
+    },
+  
+    {
+      "title" : "Terminator - Salvation",
+      "year": 2009,
+      "characters" : ["John Connor", "Marcus Wright", "Blair Williams", "Dr. Serena Kogan", "Kyle Reese"],
+      "director" : "McG"
+    },
+  
+    {
+      "title" : "Terminator - Genisys",
+      "year":2015,
+      "characters" : ["Guardian", "Jon Connor", "Sarah Connor", "Kyle Reese", "O'Brien"],
+      "director" : "Alan Taylor"
+    },
+  
+    {
+      "title" : "Terminator 6 - Terminator Reboot",
+      "year":2019,
+      "characters" : ["The Terminator", "Grace", "Sarah Connor", "Terminator", "Dani Ramos"],
+      "director" : "Tim Miller"
+    }]
+  
+  }
+```
 
 #### Install missing dependencies
 
@@ -436,9 +511,7 @@ Open the link and you should see your Elm app displaying the JSON file with valu
 
 #### Conclusion
 
-This blog post showed you how to decode JSON with Elm and created an little app to consume API calls with it.
-
-example
+This blog post gave you an short introduction to Elm and how to decode JSON with it.
 
 If you're hooked right now I highly recommend reading:
 
