@@ -171,6 +171,10 @@ Now you should have a the following folders and files present in your client fol
     └── movies.json
 ```
 
+If you now run elm reactor inside the client folder 
+The elm reactor will open an the project dashboard:
+
+![elm-project-nav](img/elm-project-nav.png)
 
 #### Why do I need an JSON decoder?
 
@@ -331,8 +335,11 @@ Now open another terminal and run inside the client folder:
 
 ``` elm reactor ```
 
+The elm reactor will open an the project dashboard:
 
-After this open [http://localhost:8000/Main.elm](http://localhost:8000/Main.elm)
+
+
+[http://localhost:8000/Main.elm](http://localhost:8000/Main.elm)
  
 Open the link and you should see your Elm app diplaying the JSON file with values inside your elm-based client app.  Congrats!
 
