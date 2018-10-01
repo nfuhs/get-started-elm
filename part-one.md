@@ -196,8 +196,8 @@ The main is the entry point of every Elm program and has beside Browser.sandbox 
 
 ``` { init = init, update = update, view = view } ```
 
-This is basically the control-flow of our Elm app. The init function initializes the Model , the Update function Updates our Model and the View if something changes in our app state and
-the view defines how our data will be displayed in the browser.  
+This is basically the control-flow of our Elm app. The init function initializes the Model , the Update function updates our Model and the View
+component will be re-rendered is our app state changes. 
 
 #### The M in MUV
 
@@ -255,7 +255,7 @@ This is the basic
 
 Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary JavaScript app.
 
-Move into your src director and create an index.html file in it.
+Move into your src directory and create an index.html file in it.
 
 ``` index.html ```
 
