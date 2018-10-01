@@ -244,7 +244,9 @@ The View part sends an direct Msg from the Html button to Increment or Decrement
 
 #### How do I run my Elm app as a normal web app?
 
-Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary Node.js based app.
+Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary Node.js based app. I'm using code from [Adrian Schaedle](https://github.com/sch) who coded an [Minimum Elm boilerplate](https://gist.github.com/sch/05ad3bbcdb95131010da3e3121b9ae67)
+
+please feel free to star it on Github!
 
 In order to run our app we first need to install [Parcel](https://parceljs.org/) with:
 
@@ -280,7 +282,7 @@ Inside our elm-app folder we first need the content inside our elm.json file to 
 }
 ```
 
-Move inside your src folder and create an index.html file and put the following code in it:
+Now create an index.html file and put the following code in it:
 
 ```html
 <html>
@@ -320,7 +322,9 @@ Now run:
 
 ``` npm install ```
 
-Wait a moment and open your node.js  served Elm app under:
+Wait a moment and run:
+
+``` parcel index.html ```
 
 [localhost:1234](localhost:1234)
 
