@@ -161,10 +161,6 @@ Reload your browser and you should see the following error message:
 As you  can see Elm even suggests that there is obviously an typo in our Main.elm file. If you ever tried to debug an Node.js application
 or any other large app you will sure see the value of this.
 
-#### What happened here exactly?
-
-Let's dig deeper into the code of the Main.elm file to make sure you understand Elm's underlying concepts before we move on:
-
 #### The structure of an Elm app
 
 Elm apps are structured after the **MUV** pattern:
@@ -190,14 +186,14 @@ main =
   Browser.sandbox { init = init, update = update, view = view }
 ```
 
-Browser.sandbox is required to run our app inside the browser an sandbox takes care that our program can only run inside the browser and not communicate with the outside world.Lets concentrate more on the underlying parts inside our Elm app.
+Browser.sandbox is required to run our app inside the browser and sandbox takes care that our program can only run inside the browser and not communicate with the outside world.
 
 The main is the entry point of every Elm program and has beside Browser.sandbox an quiet interesting part in it:
 
 ``` { init = init, update = update, view = view } ```
 
 This is basically the control-flow of our Elm app. The init function initializes the Model , the Update function updates our Model and the View
-component will be re-rendered is our app state changes. 
+component will be re-rendered if our app state changes. 
 
 #### The M in MUV
 
