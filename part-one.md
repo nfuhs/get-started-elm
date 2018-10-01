@@ -141,7 +141,7 @@ If you click at the minus button the number will get lower if you click the plus
 
 As you can see the Elm reactor compiles your Elm apps and lets you run and debug them in your the browser. This is pretty handy because if you make an error you'll get noticed and see an pretty detailed error message  with suggestions how to correct your error.
 
-Go now to the first line of our Main.elm file and change the following line:
+Go to the first line of our Main.elm file and change the following line:
 
 ```elm
 import Browser
