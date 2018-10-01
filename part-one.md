@@ -37,7 +37,7 @@ You're good to go. Enough talk,  lets get started to write some Elm.
 
 #### Begin the Elm App
 
-Move to the client folder and then init the Elm project with:
+Create a project folder named elm-app and run following command in it
 
 ``` elm init ```
 
@@ -63,7 +63,7 @@ Now move on and create inside the client folder the file Main.elm:
 
 ``` touch Main.elm ```
 
-You should now have the following folder structure inside your project folder:
+You should now have the following folder structure inside your elm-app folder:
 
 ```
 
@@ -119,11 +119,11 @@ view model =
     ]
 ```
 
-Now save the file and stay inside your projects folder. 
+Now save the file and stay inside your elm-app folder. 
 
 #### The Elm reactor
 
-Now run the following command inside the client folder
+Now run:
 
 ``` elm reactor ```
 
@@ -244,36 +244,85 @@ The View part sends an direct Msg from the Html button to Increment or Decrement
 
 #### How do I run my Elm app as a normal web app?
 
-Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary JavaScript app.
+Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary Node.js based app.
 
-Move into your src folder and create an index.html file in it.
+In order to run our app we first need to install [Parcel](https://parceljs.org/) with:
 
-``` index.html ```
+``` npm install -g parcel-bundler ```
 
-The put the following HTML inside it:
-```HTML
-<!doctype html>
+
+Inside our elm-app folder we first need the content inside our elm.json file to this:
+
+```JSON
+{
+    "type": "application",
+    "source-directories": [
+        "."
+    ],
+    "elm-version": "0.19.0",
+    "dependencies": {
+        "direct": {
+            "elm/browser": "1.0.0",
+            "elm/core": "1.0.0",
+            "elm/html": "1.0.0"
+        },
+        "indirect": {
+            "elm/json": "1.0.0",
+            "elm/time": "1.0.0",
+            "elm/url": "1.0.0",
+            "elm/virtual-dom": "1.0.0"
+        }
+    },
+    "test-dependencies": {
+        "direct": {},
+        "indirect": {}
+    }
+}
+```
+
+Move inside your src folder and create an index.html file and put the following code in it:
+
+```html
 <html>
-  <head>
-    <title>Getting started with Elm Part One</title>
-  </head>
-  <body>
-    <div id="app"></div>
-
-    <script src="app.js"></script>
-    <script>
-      var appContainer = document.getElementById('app')
-      Elm.Main.embed(appContainer)
-    </script>
-  </body>
+<body>
+  <div id="app"></div>
+  <script src="./index.js"></script>
+</body>
 </html>
 ```
 
-#### Running Elm make
+Then create an index.js file with:
 
-``` elm make Main.elm --output=src/app.js```
+```JavaScript
+var { Elm } = require("./Main.elm");
 
-Now open the index.html file inside your favorite browser.
+Elm.Main.init({
+  node: document.getElementById("app")
+});
+```
+
+The last thing we do is creating an package.json file to load and install our needed dependencies:
+
+```JSON
+{
+  "private": true,
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "devDependencies": {
+    "node-elm-compiler": "^5.0.1",
+    "parcel-bundler": "^1.10.1"
+  }
+}
+```
+
+Now run:
+
+``` npm install ```
+
+Wait a moment and open your node.js  served Elm app under:
+
+[localhost:1234](localhost:1234)
 
 #### Conclusion
 
