@@ -155,20 +155,12 @@ import Bowser
 
 Reload your browser and you should see the following error message:
 
-
 ![elm-error](img/elm-error.png)
 
 As you  can see Elm even suggests that there is obviously an typo in our Main.elm file. If you ever tried to debug an Node.js application
 or any other large app you will sure see the value of this.
 
 #### The structure of an Elm app
-
-Elm apps are structured after the **MUV** pattern:
-
-![Model-Update-View](img/Model-Update-View.png)
-
-This **MUV** pattern is always the same across all Elm apps once you understand this writing an complex web-app will become much easier since you can always update all components like in our app with ease.
-
 
 ```elm
 import Browser
@@ -192,8 +184,12 @@ The main is the entry point of every Elm program and has beside Browser.sandbox 
 
 ``` { init = init, update = update, view = view } ```
 
-This is basically the control-flow of our Elm app. The init function initializes the Model , the Update function updates our Model and the View
-component will be re-rendered if our app state changes. 
+This is basically the control-flow of our Elm app. The init function initializes the Model , the update function updates our Model and the View
+component will be re-rendered if our app state changes as  you see Elm apps are structured after the **MUV** pattern:
+
+![Model-Update-View](img/Model-Update-View.png)
+
+This **MUV** pattern is always the same across all Elm apps once you understand this writing an complex web-app will become much easier since you can always update all components like in our app with ease.
 
 #### The M in MUV
 
@@ -207,7 +203,8 @@ init =
   0
 ```
 
-Here we define the Model of our app and as you can see we use an type alias here but why do we need an type alias you ask? As mentioned earlier 
+Here we define the Model of our app and define an type alias for it.
+In Elm a Type alias is just a shorter variable for it with Model if we want to make variables accessible and init the Model with 0.
 
 #### The U in MUV
 
@@ -226,7 +223,8 @@ update msg model =
       model - 1
 ```
 
-Elm programs share their state by sending messages via functions you may heard about the term [Message Passing](https://en.wikipedia.org/wiki/Message_passing) in Object oriented programming languages like Java and C# or the [The Actor Model](https://en.wikipedia.org/wiki/Actor_model) used by other functional programming languages like Erlang.
+Here we implement the update part of our Elm app.
+Since we just want to update the value of our previously defined Model we just send Message to it if the Increment and Decrement change.
 
 ##### The V in MUV
 
@@ -242,31 +240,44 @@ view model =
     ]
 ```
 
-View model defines our content which should be displayed in the browser and as you can see also takes our functions Decrement and Increment and send it back  to the update function,
-which then updates our model and sends the state back to view. 
-
-This is the basic
+The View part sends an direct Msg from the Html button to Increment or Decrement our value in the Model.
 
 #### How do I run my Elm app as a normal web app?
 
 Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary JavaScript app.
 
-Move into your src directory and create an index.html file in it.
+Move into your src folder and create an index.html file in it.
 
 ``` index.html ```
 
 The put the following HTML inside it:
 ```HTML
+<!doctype html>
+<html>
+  <head>
+    <title>Getting started with Elm Part One</title>
+  </head>
+  <body>
+    <div id="app"></div>
 
+    <script src="app.js"></script>
+    <script>
+      var appContainer = document.getElementById('app')
+      Elm.Main.embed(appContainer)
+    </script>
+  </body>
+</html>
 ```
 
 #### Running Elm make
 
-``` elm make Main.elm --output=main.html ```
+``` elm make Main.elm --output=src/app.js```
+
+Now open the index.html file inside your favorite browser.
 
 #### Conclusion
 
-This blog post gave you an short introduction to Elm in the next part we will take a look further at on of the weird parts in Elm and learn how we decode JSON with it.
+This blog post gave you an short introduction to Elm in the next part we will take a look further at the weird parts in Elm and learn how we decode JSON with it.
 
 If you're hooked right now I highly recommend reading:
 
