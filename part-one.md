@@ -59,7 +59,7 @@ Knowing all that, would you like me to create an elm.json file now? [Y/n]:
 
 Answer with yes and proceed by creating an elm.json file.
 
-Now move on and create inside the client folder the file Main.elm:
+Now move on and create inside the elm-app folder the file Main.elm:
 
 ``` touch Main.elm ```
 
@@ -157,8 +157,7 @@ Reload your browser and you should see the following error message:
 
 ![elm-error](img/elm-error.png)
 
-As you  can see Elm even suggests that there is obviously an typo in our Main.elm file. If you ever tried to debug an Node.js application
-or any other large app you will sure see the value of this.
+As you  can see Elm even suggests that there is obviously an typo in our Main.elm file. If you ever tried to debug an Node.js application or any other large app you will sure see the value of this.
 
 #### The structure of an Elm app
 
@@ -180,7 +179,7 @@ main =
 
 Browser.sandbox is required to run our app inside the browser and sandbox takes care that our program can only run inside the browser and not communicate with the outside world.
 
-The main is the entry point of every Elm program and has beside Browser.sandbox an quiet interesting part in it:
+main is the entry point of every Elm program and has beside Browser.sandbox an quite interesting part in it:
 
 ``` { init = init, update = update, view = view } ```
 
@@ -223,8 +222,7 @@ update msg model =
       model - 1
 ```
 
-Here we implement the update part of our Elm app.
-Since we just want to update the value of our previously defined Model we just send Message to it if the Increment and Decrement change.
+Here we implement the update part of our Elm app. Since we just want to update the value of our previously defined Model we just send Message to it if the Increment and Decrement change.
 
 ##### The V in MUV
 
@@ -244,9 +242,7 @@ The View part sends an direct Msg from the Html button to Increment or Decrement
 
 #### How do I run my Elm app as a normal web app?
 
-Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary Node.js based app. I'm using code from [Adrian Schaedle](https://github.com/sch) who coded an [Minimum Elm boilerplate](https://gist.github.com/sch/05ad3bbcdb95131010da3e3121b9ae67)
-
-please feel free to star it on Github!
+Since we want to run our basic app just as a normal web page we need to translate our Main.elm into an ordinary Node.js based app. I'm using the Minimum Elm boilerplate by [Adrian Schaedle](https://github.com/sch) for this [Minimum Elm boilerplate](https://gist.github.com/sch/05ad3bbcdb95131010da3e3121b9ae67) 
 
 In order to run our app we first need to install [Parcel](https://parceljs.org/) with:
 
