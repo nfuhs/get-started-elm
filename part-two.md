@@ -1,16 +1,74 @@
-####WIP PART 2
+### Getting started with Elm Part 2: Writing an JSON decoder in Elm
 
-For now close the browser, **delete** all stuff that is in the Main.elm file and close the elm reactor by running **CTRL**+**D**
+In [part one](https://functional.works-hub.com/learn/getting-started-with-elm-4c6bc) we got a short an look at [Elm](https://elm-lang.org/) this part will give you an introduction of one of the parts which I think is hard to understand for Elm beginners decoding [JSON](https://www.json.org/). JSON is by far the most popular data interchange format and since Elm is based on [Haskell](https://www.haskell.org/) instead of JavaScript we need to write an JSON decoder in order to read the data provided by JSON. 
 
-#### Starting an App to display JSON in the browser
+<p align="center">
+<img src="img/part-two/mathclass2018.png">
+<p align="center">&copy; Daniel Stori
+</p>
 
-#### Create a project folder
 
-To create an client folder and and server folder run:
+#### Basic JSON parsing in Node.js
+
+Coming from Node.js or JavaScript you are used to run JSON.parse directly :
+
+```JavaScript
+
+var movies = '{"title" : "The Terminator"}';
+
+// parse JSON value into an JavaScript object
+
+var obj = JSON.parse(movies);
+
+// access the object property string 
+
+console.log(obj.title);
+
+//=> "The Terminator"
+
+```
+
+Let's just assume we have an file called movies.json and would like to display the values with another programming language like [Go](https://golang.org/) for example the code maybe looks like this:
+
+```Go
+
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
+type Movies struct {
+	Title string
+}
+
+func main() {
+
+	file, _ := os.Open("movies.json")
+	defer file.Close()
+	decoder := json.NewDecoder(file)
+	movies := Movies{}
+	err := decoder.Decode(&movies)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+
+	fmt.Println(movies.Title)
+}
+
+```
+
+As you can see in an strong-typed programming language like Go we have no native JavaScript objects. We need to define a struct first which holds our JSON values and provides an type definition. I choose Go as example here because as Elm it is  an strongly and static typed programming language. Another interesting point is that we need to import the encoding/json package from Go's standard library and run an JSON decoder. Before we move on to write our own JSON decoder to be used in our Elm project we will first create some sample JSON to feed our app with it. To archive this we will create an client app in Elm and we will simulate an server with Node.js which will serve our JSON from an movies.json file.
+
+#### Create an client and server folder
+
+First create an client folder server folder by running:
 
 ```mkdir -p movies/{client,server}```
 
-Instead of using an real API we will mock an JSON Rest API with node.js by using
+Now install the node.js package we will be using as our JSON server:
 
 [https://github.com/typicode/json-server](https://github.com/typicode/json-server)
 
@@ -67,13 +125,9 @@ Inside the server folder create a JSON file named **movies.json** and put the fo
   }
 ```
 
-#### Install missing dependencies
+#### Install missing Elm packages
 
-In order to run the Elm app we gonna built we need to install missing dependencies as we need to write an program to encode and decode JSON. 
-
-If you navigate to [https://package.elm-lang.org/](https://package.elm-lang.org/) you will see all current packages provided for elm 0.19.
-
-To decode JSON we need the package **elm/json**:
+In order to decode JSON with our Elm app we need to install the Elm package **elm/json**:
 
 ``` elm install elm/json ```
 
@@ -86,33 +140,20 @@ Should I move it into "direct" dependencies for more general use? [Y/n]:
 
 ```
 
-Answer again with yes so you can use elm/json directly in the client app.
-
-Now you should have a the following folders and files present in your client folder:
-
+Answer with yes so you can use the elm/json package directly in the Elm app. Now you should have a the following folders and files present in your project folder:
 
 ```
+
 ├── client
 │   ├── elm.json
 │   ├── Main.elm
 │   └── src
 └── server
     └── movies.json
+
 ```
 
-
-#### Why do I need an JSON decoder?
-
-We need to write an encode function and an decode function in order to represent the JSON data in our Elm app.
-
-Let's just assume we have the following JSON:
-
-```"title" : "The Terminator"```
-
-Elm itself isn't related to JavaScript or its Objects, Elm itself represents Data as 
-
-In order to represent this JSON data in Elm we first need to
-import the elm.json.decoder from elm/json:
+#### Basic sample of an JSON decoder in Elm
 
 ```elm
 
@@ -125,14 +166,12 @@ titleDecoder =
 
 field "title" String
 
-
-
 ```
 
-Then we need to create a Model which is a representation of the JSON Object in Elm:
+
+We need to create a Model which represents our JSON data in Elm :
 
 ```elm
-
 type alias Movies =
 
 {
@@ -145,7 +184,7 @@ movies : String
 
 ```
 
-Then we need the write an encode function which lets us represent the data inside the view:
+Then we need the write an decode function which lets us use the data inside the view:
 
 ```elm
 
@@ -250,40 +289,24 @@ decoder =
 
 Inside the server folder run the following command to start the JSON server:
 
-```json-server --watch movies.json --port 5050```
+``` json-server --watch movies.json --port 5050 ```
 
 Wait a second and json-server will serves our JSON file as resources under:
 
-[http://localhost:5050/movies](http://localhost:5050/movies) 
+[http://localhost:5050/movies](http://localhost:5050/movies)
 
-Open this link and you should see our JSON file with values in the browser.
+Open this link and you should see our JSON file with values in the browser now move inside the client folder and run:
 
-Now open another terminal and run elm reactor again inside the client folder:
+``` elm-reactor ```
 
-[http://localhost:8000/Main.elm](http://localhost:8000/Main.elm)
- 
-Open the link and you should see your Elm app displaying the JSON file with values inside your elm-based client app.  Congrats!
+An prompt will show up to inform you that your Elm app is running open the following link:
 
+[http://localhost:8000/](http://localhost:8000/)
+
+Inside the File Navigation open the **Main.elm** file now you should see your Elm app displaying the JSON file with values inside your elm-based client app.
 
 #### Conclusion
 
-This blog post gave you an short introduction to Elm and how to decode JSON with it.
-
-If you're hooked right now I highly recommend reading:
-
-[The Official Elm Introduction](https://guide.elm-lang.org/) 
-
-and code through all examples in
-
-[The Elm Architecture](https://guide.elm-lang.org/architecture/)
-
-If you  want to know more about JSON decoders and Evan Czaplicki's vision of Elm's of data interchange in Elm you can read more about it here:
-
-[https://gist.github.com/evancz/1c5f2cf34939336ecb79b97bb89d9da6](https://gist.github.com/evancz/1c5f2cf34939336ecb79b97bb89d9da6)
-
-
-I hope you enjoyed reading it if so feel free to follow me on [GitHub](https://github.com/nfuhs) or [Twitter](https://twitter.com/NorbertFuhs)
-
-If you have any questions left just post an issue in this repository:
+I hope you enjoyed reading part two if you liked it feel free to follow me on [GitHub](https://github.com/nfuhs) or [Twitter](https://twitter.com/NorbertFuhs) if you have any questions just post an issue in this repo:
 
 [https://github.com/nfuhs/get-started-elm](https://github.com/nfuhs/get-started-elm)
