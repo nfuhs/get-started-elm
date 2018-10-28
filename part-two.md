@@ -171,117 +171,56 @@ field "title" String
 
 We need to create a Model which represents our JSON data in Elm :
 
-```elm
-type alias Movies =
-
-{
-movies : String
-, title : String
-, year : Int
-, main_characters : String
-, director : String 
-}
-
-```
+#### TODO ELM CODE-JSON-1
 
 Then we need the write an decode function which lets us use the data inside the view:
 
-```elm
-
-encode : Movie -> E.Value
-encode movie =
-E.object
-
-```
+#### TODO ELM CODE-JSON-2
 
 After this we go on and write the decoder function so we can represent the data in Elm:
 
-```elm
+#### TODO ELM CODE-JSON-3
 
-decoder : D.Decoder Movie
-decoder =
-    D.map4 Movie
-    (D.field "title" D.string)
-    (D.field "year" D.Int)
-    (D.field "main_characters" D.string)
-    (D.field "director" D.string)
+#### TODO ELM CODE-HTTP-INTRO
 
-```
+#### TODO FINISHED ELM APP 
 
-#### PROTOTYPE
+``` elm
 
-```elm
-
-module Movie exposing (Movie, encode, decoder)
+module main exposing (data, encode, decoder)
 
 import Json.Decode as D
 import Json.Encode as E
 
-type alias Movies =
+-- JSON DATA
 
-{
-movie : String
-, title : String
-, year : Int
+type alias Data =
+{ title: String
+, year: Int
 , characters : String
 , director : String
 }
 
-encode : Movie -> E.Value
-encode movie =
-E.object
+-- ENCODE
 
-decoder : D.Decoder Movie
-decoder =
-    D.map4 Movie
-    (D.field "title" D.string)
-    (D.field "year" D.Int)
-    (D.field "characters" D.string)
-    (D.field "director" D.string)
-
-```
-
-#### TODO Finished Elm App
-
-``` elm
-
-module Data.JsonValue exposing (JsonValue(..), decoder)
-
-import movie exposing (movie)
-import elm/json.decoder as Decode
-    exposing
-        (Decoder
-        , dict
-        , string
-        , int
-        , float
-        , list
-        , null
-        , oneOf
-        , lazy
-        , map
-        , bool
-        )
-
-type JsonValue
-    = JsonString string
-    | JsonInt Int
-    | JsonFloat float
-    | JsonArray (List JsonValue)
-    | JsonObject (Dict String JsonValue)
-    | JsonNull 
-
-decoder : Decoder JsonValue
-decoder =
-    oneOf
-    [ map JsonStringstring string
-    , map JsonInt int 
-    , map JsonFloat float
-    , map JsonBoolean bool
-    , list (lazy (\_ -> decoder)) |> map JsonArray
-    , dict (lazy (\_ -> decoder)) |> map JsonObject
-    , null JsonNull
+encode : data -> E.Value
+encode cause =
+    E.object
+    [("title", E.string data.title)
+    ,("year", E.Int data.year)
+    ,("characters", E.string data.characters)
+    ,("director", E.string data.director)
     ]
+
+-- DECODER
+
+decoder : D.Decoder Data
+decoder =
+    D.map4 Data
+    (D.field "title" D.string)
+    (D.field "year" D.int)
+    (D.field "characters", D.string)
+    (D.field "director", D.string)
 
 ```
 
