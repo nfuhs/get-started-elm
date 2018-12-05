@@ -1,6 +1,6 @@
 ### Getting started with Elm Part 2: Writing an JSON decoder in Elm
 
-In [part one](https://functional.works-hub.com/learn/getting-started-with-elm-4c6bc) we got a short an look at [Elm](https://elm-lang.org/) this part will give you an introduction of one of the parts which I think is hard to understand for Elm beginners decoding [JSON](https://www.json.org/). JSON is by far the most popular data interchange format and since Elm is based on [Haskell](https://www.haskell.org/) instead of JavaScript we need to write an JSON decoder in order to read the data provided by JSON. 
+In [part one](https://functional.works-hub.com/learn/getting-started-with-elm-4c6bc) we got a short an look at [Elm](https://elm-lang.org/) this part will give you an introduction of one of the parts which I think is hard to understand for Elm beginners decoding [JSON](https://www.json.org/). JSON is by far the most popular data interchange format and since Elm is based on [Haskell](https://www.haskell.org/) instead of JavaScript you need to write an JSON decoder in order to represent the data in Elm. 
 
 <p align="center">
 <img src="img/part-two/mathclass2018.png">
@@ -10,7 +10,7 @@ In [part one](https://functional.works-hub.com/learn/getting-started-with-elm-4c
 
 #### Basic JSON parsing in Node.js
 
-Coming from Node.js or JavaScript you are used to run JSON.parse directly :
+Coming from JavaScript or Node.js you are used to run JSON.parse directly :
 
 ```JavaScript
 
@@ -28,7 +28,7 @@ console.log(obj.title);
 
 ```
 
-Let's just assume we have an file called movies.json and would like to display the values with another programming language like [Go](https://golang.org/) for example the code maybe looks like this:
+Let's just assume we have an file called movies.json and you would like to display the values with another programming language like [Go](https://golang.org/) for example:
 
 ```Go
 
@@ -60,7 +60,11 @@ func main() {
 
 ```
 
-As you can see in an strong-typed programming language like Go we have no native JavaScript objects. We need to define a struct first which holds our JSON values and provides an type definition. I choose Go as example here because as Elm it is  an strongly and static typed programming language. Another interesting point is that we need to import the encoding/json package from Go's standard library and run an JSON decoder. Before we move on to write our own JSON decoder to be used in our Elm project we will first create some sample JSON to feed our app with it. To archive this we will create an client app in Elm and we will simulate an server with Node.js which will serve our JSON from an movies.json file.
+As you can see in an strong-typed programming language like Go we have no native JavaScript objects. We need to define a struct first which holds our JSON values and provides an type definition. I choose Go as example here because as Elm it is an strongly typed programming language. Another interesting point is that we need to import the encoding/json package from Go's standard library and run an JSON decoder function. 
+
+Before you move on to write your own JSON decoder to be used in the Elm client app we will first create some sample JSON data to feed our app with. 
+
+To archive this we will simulate an server with Node.js which will serve our data as a file called movies.json.
 
 #### Create an client and server folder
 
@@ -76,7 +80,7 @@ Install it by running:
 
 ``` npm install -g json-server ```
 
-Inside the server folder create a JSON file named **movies.json** and put the following into it:
+Inside the server folder create a JSON file named **movies.json** and put the following content to it:
 
 ```json
 {
@@ -127,7 +131,7 @@ Inside the server folder create a JSON file named **movies.json** and put the fo
 
 #### Install missing Elm packages
 
-In order to decode JSON with our Elm app we need to install the Elm package **elm/json**:
+In order to decode JSON with your Elm app you need to install the Elm package **elm/json**:
 
 ``` elm install elm/json ```
 
@@ -139,7 +143,6 @@ I found it in your elm.json file, but in the "indirect" dependencies.
 Should I move it into "direct" dependencies for more general use? [Y/n]: 
 
 ```
-
 Answer with yes so you can use the elm/json package directly in the Elm app. Now you should have a the following folders and files present in your project folder:
 
 ```
@@ -168,16 +171,15 @@ field "title" String
 
 ```
 
-
-We need to create a Model which represents our JSON data in Elm :
+First you need to create a Model which represents your JSON data in Elm :
 
 #### TODO ELM CODE-JSON-1
 
-Then we need the write an decode function which lets us use the data inside the view:
+Then you need the write the decode function which lets you use the data inside the view:
 
 #### TODO ELM CODE-JSON-2
 
-After this we go on and write the decoder function so we can represent the data in Elm:
+After this go on and write the decoder function so we can represent the data in Elm:
 
 #### TODO ELM CODE-JSON-3
 
@@ -224,17 +226,19 @@ decoder =
 
 ```
 
-#### Run the JSON Server and the Elm App:
+#### Run JSON Server and Elm App:
 
-Inside the server folder run the following command to start the JSON server:
+Inside the server folder run the following command to start JSON server:
 
 ``` json-server --watch movies.json --port 5050 ```
 
-Wait a second and json-server will serves our JSON file as resources under:
+Wait a second and the json-server will serve our JSON file as resources under:
 
 [http://localhost:5050/movies](http://localhost:5050/movies)
 
-Open this link and you should see our JSON file with values in the browser now move inside the client folder and run:
+Open this link and you should see our JSON file with values in the browser.
+
+Now switch inside the client folder and run:
 
 ``` elm-reactor ```
 
@@ -246,6 +250,6 @@ Inside the File Navigation open the **Main.elm** file now you should see your El
 
 #### Conclusion
 
-I hope you enjoyed reading part two if you liked it feel free to follow me on [GitHub](https://github.com/nfuhs) or [Twitter](https://twitter.com/NorbertFuhs) if you have any questions just post an issue in this repo:
+I hope you enjoyed reading part two if you liked it feel free to follow me on [GitHub](https://github.com/nfuhs) or [Twitter](https://twitter.com/NorbertFuhs) if you have any questions just post an issue to this repo:
 
 [https://github.com/nfuhs/get-started-elm](https://github.com/nfuhs/get-started-elm)
